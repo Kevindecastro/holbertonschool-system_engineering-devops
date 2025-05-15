@@ -1,0 +1,58 @@
+# 1-distributed web infrastructure
+
+---
+
+# 🌐 Web Infrastructure Presentation
+
+## 🔹 Infrastructure Components
+
+### For every additional element, why you are adding it?
+
+* **Load Balancer (HAProxy)**: To distribute incoming traffic between the two servers. This prevents one server from being overwhelmed and improves availability and reliability.
+* **Two Web Servers (Nginx)**: To serve the static content (HTML, CSS, JavaScript) and reverse proxy requests to the application server. This allows scaling and load sharing.
+* **Two Application Servers**: They host the application code (for example, a Flask/Django/Node.js app) and handle the dynamic content.
+* **Two Databases (MySQL)**: Set up as a **Primary-Replica** (Master-Slave) cluster for redundancy and performance. The application writes to the Primary and reads from both.
+
+### What distribution algorithm your load balancer is configured with and how it works?
+
+* The load balancer is configured with the **Round Robin** algorithm.
+* This means it forwards each new incoming request to the next server in a rotating list, distributing the load evenly.
+* Example: If Server A handles the first request, Server B will handle the second, then A again, and so on.
+
+### Is your load-balancer enabling an Active-Active or Active-Passive setup, explain the difference between both
+
+* This is an **Active-Active** setup.
+* **Active-Active**: Both servers are running and handling traffic simultaneously. The load balancer distributes requests to both.
+* **Active-Passive**: One server is active, the other is on standby and only takes over if the active one fails.
+
+### How a database Primary-Replica (Master-Slave) cluster works?
+
+* The **Primary** node handles all write operations (INSERT, UPDATE, DELETE).
+* The **Replica** node(s) synchronize data from the Primary and handle read operations.
+* Replication is usually asynchronous, where the Replica catches up to the Primary.
+* This setup improves performance and adds redundancy in case the Primary fails.
+
+### What is the difference between the Primary node and the Replica node in regard to the application?
+
+* The **Primary** node is where the application writes data (e.g., adding users, editing content).
+* The **Replica** node(s) are used for **read-only** queries to offload the Primary and improve read performance.
+* The application is usually configured to split read/write queries accordingly.
+
+---
+
+## ⚠️ Infrastructure Limitations
+
+### Where are SPOF:
+
+* **Single Load Balancer**: If the HAProxy instance fails, the entire site becomes unreachable.
+* **Single Primary Database**: If the Primary MySQL node goes down, writes can't be processed until failover.
+
+### Security issues (no firewall, no HTTPS):
+
+* No **firewalls** to restrict access to services like MySQL or the internal application server, which exposes sensitive data.
+* No **HTTPS**, which means all traffic is in plaintext. Data (including credentials) can be intercepted.
+
+### No monitoring:
+
+* There’s no monitoring system (like Prometheus, Grafana, Nagios) in place.
+* You can’t detect or be alerted in case of failure, high CPU, low disk space, etc.

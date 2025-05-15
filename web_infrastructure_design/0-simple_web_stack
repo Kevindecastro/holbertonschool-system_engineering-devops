@@ -1,0 +1,40 @@
+# 0. Simple Web Stack
+---
+
+# 🌐 Web Infrastructure Presentation
+
+## 🔹 Infrastructure Components
+
+### What is a server ?
+A physical or virtual machine hosting services.
+
+### What is the role of the domain name ?
+Human-readable address (foobar.com) that maps to the server's IP via DNS.
+
+### What type of DNS record www is in www.foobar.com
+A type A record, mapping www.foobar.com to 8.8.8.8.
+
+### What is the role of the web server ?
+A web server (e.g., Nginx) handles HTTP/HTTPS requests from clients, serves static content, and forwards dynamic requests to the application server.
+
+### What is the role of the application server ?
+An application server (e.g., Flask, Django) runs backend code, processes business logic, and communicates with the database.
+
+### What is the role of the database ?
+A database (e.g., MySQL) stores persistent application data, such as user information, content, and transactions.
+
+### What is the server using to communicate with the computer of the user requesting the website ?
+Communication occurs via HTTP or HTTPS protocols over the TCP/IP stack. HTTPS adds encryption through SSL/TLS.
+
+---
+
+## ⚠️ Infrastructure Limitations
+
+### SPOF (Single Point of Failure) :
+If the server goes down, the entire website becomes unreachable.
+
+### Downtime During Maintenance :
+Updating code or restarting services causes site unavailability.
+
+### No Scalability :
+One server cannot handle a high volume of simultaneous requests.

@@ -1,0 +1,40 @@
+# 3-scale_up
+
+---
+
+## 🌐 Scale up infrastructure explanation
+
+**Goal:** This infrastructure is designed to scale the web application to handle more traffic and ensure high availability.
+
+**Added components:**
+
+- **Application Servers (2 total):**
+  - Reason: Separate the application logic (Python, PHP, etc.) from the web servers.
+  - Benefit: This allows web servers to focus on static content, and app servers to process dynamic requests, improving performance and scalability.
+
+- **Second Load Balancer (HAProxy):**
+  - Reason: Avoid a Single Point of Failure (SPOF) at the load balancer level.
+  - Configuration: The two load balancers are set up in a high-availability (HA) cluster (active-passive or active-active).
+  - Benefit: If one load balancer goes down, the other can take over, ensuring continuous service availability.
+
+- **Component separation:**
+  - **Web Servers** serve static content (HTML, CSS, JS).
+  - **App Servers** handle backend processing.
+  - **Database Server** is dedicated to data storage and queries.
+
+---
+
+## ⚠️ Infrastructure Limitations
+
+**Why this architecture:**
+- **Redundancy**: Each layer (LB, web, app) has at least 2 servers to avoid SPOF.
+- **Scalability**: Traffic can be distributed across multiple servers.
+- **Flexibility**: Each component can be scaled independently depending on the bottleneck.
+
+---
+
+## Abbreviations used:
+- **LAMP**: Linux, Apache, MySQL, PHP – classic stack (we replace Apache with Nginx and possibly PHP with another backend).
+- **SPOF**: Single Point Of Failure – eliminated with LB cluster and multiple servers.
+- **QPS**: Queries Per Second – scaling helps handle higher QPS.
+
