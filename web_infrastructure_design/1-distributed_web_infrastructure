@@ -56,3 +56,10 @@
 
 * There’s no monitoring system (like Prometheus, Grafana, Nagios) in place.
 * You can’t detect or be alerted in case of failure, high CPU, low disk space, etc.
+
+---
+
+## Abbreviations used:
+- **LAMP**: Linux, Apache, MySQL, PHP – classic stack (we replace Apache with Nginx and possibly PHP with another backend).
+- **SPOF**: Single Point Of Failure – eliminated with LB cluster and multiple servers.
+- **QPS**: Queries Per Second – scaling helps handle higher QPS.

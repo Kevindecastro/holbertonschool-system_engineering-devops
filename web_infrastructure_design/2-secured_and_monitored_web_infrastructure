@@ -65,3 +65,10 @@ This design lacks **separation of concerns** and **scalability**:
 * A compromise in one component affects all others.
 * Updates or crashes in one component (e.g., app server) can impact the whole system.
   A more modular architecture allows better performance, security, and maintainability.
+
+---
+
+## Abbreviations used:
+- **LAMP**: Linux, Apache, MySQL, PHP – classic stack (we replace Apache with Nginx and possibly PHP with another backend).
+- **SPOF**: Single Point Of Failure – eliminated with LB cluster and multiple servers.
+- **QPS**: Queries Per Second – scaling helps handle higher QPS.
