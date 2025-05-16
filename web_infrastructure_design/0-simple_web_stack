@@ -6,35 +6,39 @@
 ## 🔹 Infrastructure Components
 
 ### What is a server ?
-A physical or virtual machine hosting services.
+A server is a physical or virtual machine located in a data center that provides services to other computers (clients) over a network. It typically runs an operating system (OS) (e.g., Linux) and hosts different services like web servers, databases, and application runtimes.
 
 ### What is the role of the domain name ?
-Human-readable address (foobar.com) that maps to the server's IP via DNS.
+The domain name (e.g., foobar.com) is a human-readable address that maps to the IP address of a server. It allows users to access a website without needing to remember numeric IP addresses.
+* The DNS (Domain Name System) translates this domain name into an IP address via DNS records.
 
 ### What type of DNS record www is in www.foobar.com
-A type A record, mapping www.foobar.com to 8.8.8.8.
+www is an A record, which maps the hostname (www.foobar.com) to an IPv4 address (e.g., 8.8.8.8).
 
 ### What is the role of the web server ?
-A web server (e.g., Nginx) handles HTTP/HTTPS requests from clients, serves static content, and forwards dynamic requests to the application server.
+The web server (e.g., Nginx) is responsible for handling HTTP/HTTPS requests from users. It serves static content (like HTML, CSS, images), and forwards dynamic requests to the application server.
 
 ### What is the role of the application server ?
-An application server (e.g., Flask, Django) runs backend code, processes business logic, and communicates with the database.
+The application server (e.g., Flask, Django) executes backend code, handles user logic, and generates dynamic content based on user requests or data.
+
+### What is the role of the code base / application files?
+The code base contains the application logic (e.g., Python/Node.js/PHP files). It's run by the application server to provide functionality to the users.
 
 ### What is the role of the database ?
-A database (e.g., MySQL) stores persistent application data, such as user information, content, and transactions.
+The database (e.g., MySQL) stores persistent application data such as user accounts, posts, transactions, etc.
 
 ### What is the server using to communicate with the computer of the user requesting the website ?
-Communication occurs via HTTP or HTTPS protocols over the TCP/IP stack. HTTPS adds encryption through SSL/TLS.
+Communication between the user's browser and the server occurs over the Internet using the TCP/IP protocol stack, typically via the HTTP or HTTPS protocols.
 
 ---
 
 ## ⚠️ Infrastructure Limitations
 
 ### SPOF (Single Point of Failure) :
-If the server goes down, the entire website becomes unreachable.
+The entire infrastructure relies on a single server. If it goes down (hardware failure, crash, etc.), the whole website becomes inaccessible.
 
 ### Downtime During Maintenance :
-Updating code or restarting services causes site unavailability.
+When updating code, restarting services (e.g., Nginx), or applying patches, the server must temporarily go offline, causing website downtime.
 
 ### No Scalability :
-One server cannot handle a high volume of simultaneous requests.
+This setup cannot handle increased traffic or load — the single server has limited CPU, memory, and bandwidth resources.
